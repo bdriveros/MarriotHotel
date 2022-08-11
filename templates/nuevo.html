@@ -1,5 +1,7 @@
 {% extends 'base.html' %} 
 {% block contenido %}
+{% if 'usuario' in session: %}
+
 <form action="/nuevo" method="post">
   {{form.codigo.label}} {{form.codigo}}
   <br/>
@@ -11,4 +13,8 @@
   <br/>
   {{form.enviar}} {{form.hidden_tag()}}
 </form>
+
+{% else %}
+<h3> Debes iniciar sesion para poder registrar un producto </h3>
+{% endif %}
 {% endblock %}

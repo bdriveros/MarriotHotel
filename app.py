@@ -1,4 +1,4 @@
-from flask import request, Flask,flash, render_template, jsonify, url_for
+from flask import request, Flask,flash, render_template, jsonify, url_for,session,make_response,g
 import database as bd
 from forms import Producto
 from settings.config import configuracion
@@ -9,7 +9,31 @@ app.config.from_object(configuracion)
 
 @app.route('/')
 def api():
-    return render_template('index.html',titulo="Ejemplo SQLite")
+    session['usuario']="Brayan"
+    visited=request.cookies.get("visited")
+    if visited=="True":
+        return render_template("index.html", titulo="Gracias por volver")
+    else:
+        response = make_response(render_template('index.html',titulo="Nuevo usuario"))
+        response.set_cookie('visited', 'True')
+        response.set_cookie('language','es')
+        return response
+    #session['rol']="Admin"
+    #return render_template('index.html',titulo="Ejemplo SQLite")
+
+#uso de decorador before_request que pertence a los decoradores de peticion
+@app.before_request
+def before_request():
+    if 'usuario' in session:
+        g.user="bdriveros"
+    else:
+        g.user=None
+
+@app.route('/cerrar')
+def cerrar():
+    session.clear()
+    flash("Sesion cerrada")
+    return render_template('Cerrando.html',titulo="Sesion finalizada")
 
 @app.route('/productos')
 def getProductos():

@@ -16,6 +16,18 @@
     <a href="/">Inicio</a>
     <a href="/nuevo">Nuevo Producto</a>
     <a href="/productos">Listar productos</a>
+    <a href="/cerrar">Cerrar Sesion</a>
+
+    {% if 'usuario' in session: %}
+    <h3>usuario:{{session['usuario']}}</h3>
+    {% else %}
+    <h3>Sin usuario</h3>
+    {% endif %}
+
+    {% if request.cookies.get('visited')=="True" %}
+    <h4>Que bueno verte por aca!, recordamos tu idioma preferido {{request.cookies.get('language')}}</h4>
+    {% endif %}
+
     <hr />
     {% with mensajes = get_flashed_messages() %} {% if mensajes %}
     <ul>
