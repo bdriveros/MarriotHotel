@@ -25,7 +25,7 @@
     {% endif %}
 
     {% if request.cookies.get('visited')=="True" %}
-    <h4>Que bueno verte por aca!, recordamos tu idioma preferido {{request.cookies.get('language')}}</h4>
+    <h4>Que bueno verte por aca! {{g.user}}, recordamos tu idioma preferido {{request.cookies.get('language')}}</h4>
     {% endif %}
 
     <hr />
