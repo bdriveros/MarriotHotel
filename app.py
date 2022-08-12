@@ -35,6 +35,14 @@ def cerrar():
     flash("Sesion cerrada")
     return render_template('Cerrando.html',titulo="Sesion finalizada")
 
+@app.route('/main')
+def main():
+    return render_template('main.html',titulo="Marriot - Wuxi Moaye City ")
+
+@app.route('/details')
+def detalleHabitacion():
+    return render_template('details.html',titulo="Habitación x")
+
 @app.route('/productos')
 def getProductos():
     lista_productos = bd.sql_select_productos()
