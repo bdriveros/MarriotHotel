@@ -17,6 +17,18 @@ def sql_insert_producto(id,nombre,precio,cantidad):
     con.commit()
     con.close()
 
+def sql_signup(id,nombres,apellidos,correo,celular,username,password):
+    strsql="INSERT INTO Usuarios (Id,Nombres,Apellidos,Correo,Celular,Username,Password) VALUES(?,?,?,?,?,?,?),(id,nombres,apellidos,correo,celular,username,password);"
+    print(strsql)
+    con = sql_connection()
+    cursor_Obj = con.cursor()
+    cursor_Obj.execute(strsql)
+    con.commit()
+    con.close()
+
+def sql_login():
+    return print("login")
+
 def sql_select_productos():
     strsql="SELECT * FROM Producto;"
     print(strsql)
